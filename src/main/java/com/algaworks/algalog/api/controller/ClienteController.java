@@ -15,12 +15,15 @@ import java.util.Optional;
 @RestController
 @RequestMapping ("/clientes")
 public class ClienteController {
-
-//    Injeta um EntityManager na varíavel de instancia manager
+    /*
+     Injeta um EntityManager na varíavel de instancia manager
+     */
 //    @PersistenceContext
 
-//    É uma interface do jakarta.persistence que é usada para fazer as operações com as entidades,
-//    que são refletidas depois no banco de dados, inserçes, excões, atualizaçõlusões e etc.
+    /*
+    É uma interface do jakarta.persistence que é usada para fazer as operações com as entidades,
+    que são refletidas depois no banco de dados, inserçes, excões, atualizaçõlusões e etc.
+     */
 //    private EntityManager manager;
 
 //    @Autowired
@@ -32,7 +35,9 @@ public class ClienteController {
 //        return clienteRepository.findByNomeContaining("a");
         return clienteRepository.findAll();
     }
+
     /*
+    @GetMapping significa que o tipo de requisição é para fazer uma consulta no banco de dados
     @PathVariable vincula o parametro do método "Long clienteId" a variavel "{clienteId}" do caminho
      */
     @GetMapping("/{clienteId}")
