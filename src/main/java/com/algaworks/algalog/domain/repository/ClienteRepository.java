@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     List<Cliente> findByNome(String nome);
+
+    //"Containing" quer dizer que o nome não é exato, como se fosse o like do mysql
     List<Cliente> findByNomeContaining(String nome);
 
 }
