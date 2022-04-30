@@ -8,9 +8,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
+/*
+Adicionar comentários das 3 anotações abaixo
+ */
 @AllArgsConstructor
 @RestController
 @RequestMapping ("/clientes")
@@ -18,21 +22,25 @@ public class ClienteController {
     /*
      Injeta um EntityManager na varíavel de instancia manager
      */
-//    @PersistenceContext
+    //@PersistenceContext
 
     /*
     É uma interface do jakarta.persistence que é usada para fazer as operações com as entidades,
     que são refletidas depois no banco de dados, inserçes, excões, atualizaçõlusões e etc.
      */
-//    private EntityManager manager;
+    //private EntityManager manager;
 
-//    @Autowired
+    /*
+    @Autowired
+     */
     private ClienteRepository clienteRepository;
 
-    //@GetMapping
+    /*
+    @GetMapping significa que o tipo de requisição é para fazer uma consulta no banco de dados
+     */
     @GetMapping
     public List<Cliente> listar(){
-//        return clienteRepository.findByNomeContaining("a");
+      //return clienteRepository.findByNomeContaining("a");
         return clienteRepository.findAll();
     }
 
@@ -61,23 +69,25 @@ public class ClienteController {
     /*
     @PostMapping significa que o tipo de requisição criara algo, por exemplo salvar algo no banco de dados
     @ResponseStatus muda o status na resposta da requisição, por exemplo ao inves de "200 ok" mostra "201 Created"
+    @Valid valida o body da requisição antes de continuar a execução do controller
     @RequestBody vincula o parametro do método no caso "Cliente cliente",
-    ao corpo da requisição (o que vier na requisição)
+                 ao corpo da requisição (o que vier na requisição)
      */
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente adicionar(@RequestBody Cliente cliente){
+    public Cliente adicionar(@Valid @RequestBody Cliente cliente){
         return clienteRepository.save(cliente);
     }
 
     /*
     @PutMapping significa que o tipo da requisição é para editar alguém dentro do banco de dados
     @PathVariable vincula o parametro "Long clienteId" do método a variavel "{clienteId}" do caminho
+    @Valid valida o body da requisição antes de continuar a execução do controller
     @RequestBody vincula o parametro do método no caso "Cliente cliente",
-    ao corpo da requisição (o que vier na requisição)
+                 ao corpo da requisição (o que vier na requisição)
      */
     @PutMapping("/{clienteId}")
-    public ResponseEntity<Cliente> atualizar(@PathVariable Long clienteId, @RequestBody Cliente cliente){
+    public ResponseEntity<Cliente> atualizar(@PathVariable Long clienteId,@Valid @RequestBody Cliente cliente){
         if (!clienteRepository.existsById(clienteId)) {
             return ResponseEntity.notFound().build();
         }
